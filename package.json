@@ -1,0 +1,25 @@
+{
+  "name": "ulsparser",
+  "version": "0.1.0",
+  "description": "Helper library for parsing ULS database files (from http://wireless.fcc.gov/uls/index.htm?job=transaction&page=weekly)",
+  "url": "https://github.com/taxilian/ulsparser",
+  "keywords": [
+    "ham radio",
+    "uls",
+    "fcc"
+  ],
+  "author": {
+    "name": "Richard Bateman",
+    "email": "taxilian@gmail.com"
+  },
+  "main": "./ulsparser.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/taxilian/ulsparser.git"
+  },
+  "readmeFilename": "README.md",
+  "_id": "ulsparser@0.1.0",
+  "dependencies": {
+    "line-reader": "= 0.2.3"
+  }
+}
