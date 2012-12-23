@@ -266,8 +266,13 @@ function ULSParser(dirPath) {
     this.paths = {
         root: dirPath,
         AM: path.join(dirPath, "AM.dat"),
+        CO: path.join(dirPath, "CO.dat"),
         EN: path.join(dirPath, "EN.dat"),
-        HD: path.join(dirPath, "HD.dat")
+        HD: path.join(dirPath, "HD.dat"),
+        HS: path.join(dirPath, "HS.dat"),
+        LA: path.join(dirPath, "LA.dat"),
+        SC: path.join(dirPath, "SC.dat"),
+        SF: path.join(dirPath, "SF.dat")
     };
     this.rootPath = dirPath;
 
