@@ -314,3 +314,10 @@ p.parseEntriesForType = function(t, processLine) {
 };
 
 module.exports = ULSParser;
+
+ULSParser.classMap = classMap;
+ULSParser.entityTypeMap = entityTypeMap;
+ULSParser.applicantTypeCodeMap = applicantTypeCodeMap;
+ULSParser.licenseStatusMap = licenseStatusMap;
+ULSParser.attachmentCodeMap = attachmentCodeMap;
+ULSParser.logCodeMap = logCodeMap;
