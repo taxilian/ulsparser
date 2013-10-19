@@ -1,6 +1,6 @@
 {
   "name": "ulsparser",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Helper library for parsing ULS database files (from http://wireless.fcc.gov/uls/index.htm?job=transaction&page=weekly)",
   "url": "https://github.com/taxilian/ulsparser",
   "keywords": [
