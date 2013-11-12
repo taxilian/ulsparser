@@ -120,7 +120,7 @@ var map = {
             uls_filenumber: doc[2],
             ebf_number: doc[3],
             callsign: doc[4],
-            entity_type: entityTypeMap(doc[5]) || doc[5],
+            entity_type: entityTypeMap[doc[5]] || doc[5],
             licensee_id: doc[6],
             entity_name: doc[7],
             first_name: doc[8],
@@ -138,7 +138,7 @@ var map = {
             attn_line: doc[20],
             sgin: doc[21],
             frn: doc[22],
-            applicant_type: applicantTypeCodeMap(doc[23]) || doc[23],
+            applicant_type: applicantTypeCodeMap[doc[23]] || doc[23],
             status_code: doc[25],
             status_date: doc[26]
         };
@@ -151,7 +151,7 @@ var map = {
             uls_filenumber: doc[2],
             ebf_number: doc[3],
             callsign: doc[4],
-            license_status: licenseStatusMap(doc[5]) || doc[5],
+            license_status: licenseStatusMap[doc[5]] || doc[5],
             radio_service_code: doc[6],
             grant_date: doc[7],
             expired_date: doc[8],
