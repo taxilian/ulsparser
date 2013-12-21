@@ -86,7 +86,7 @@ var map = {
             uls_filenumber: doc[2],
             ebf_number: doc[3],
             callsign: doc[4],
-            licence_class: classMap[doc[5]] || doc[5],
+            license_class: classMap[doc[5]] || doc[5],
             group_code: doc[6], // Unsure what this is
             region_code: doc[7],
             trustee_callsign: doc[8],
@@ -97,7 +97,7 @@ var map = {
             is_vanity_change: doc[13], // Unsure what this is
             vanity_relationship: doc[14], // Unsure what this is
             prev_callsign: doc[15],
-            prev_licence_class: classMap[doc[16]] || doc[16],
+            prev_license_class: classMap[doc[16]] || doc[16],
             trustee_name: doc[17]
         };
     },
@@ -143,6 +143,7 @@ var map = {
             status_date: doc[26]
         };
         if (ret.applicant_type == "Other") { ret.applicant_type = doc[24]; }
+        return ret;
     },
     HD: function(doc) { // Application / License Header
         return {
@@ -310,6 +311,71 @@ p.parseEntriesForType = function(t, processLine) {
         };
 
         processLine(doc, doneCb);
+    });
+};
+
+
+/**
+ * handlers expects an object formatted like so:
+ *
+ *  [
+ *      ["EN", function(line, cb) { ... }],
+ *      ["HD", function(line, cb) { ... }],
+ *      ...
+ *  ]
+ *
+ *  One function per type
+ *
+ */
+p.parseSortedFile = function(filename, handlers, oncomplete) {
+    var path = path.join(this.rootPath, filename);
+
+    function getBlankObj() {
+        return {
+            AM: [], CO: [], EN: [], HD: [], HS: [], LA: [], SC: [], SF: []
+        };
+    }
+    var curGroup = null;
+    var cur_uid = null;
+    function processGroup(group, nextCb) {
+        if (!group) { return; } // handle null case
+
+        var q = [];
+        handlers.forEach(function(v) {
+            curGroup[v[0]].forEach(function(l) {
+                q.push([v[1], l]);
+            });
+        });
+        curGroup = getBlankObj();
+
+        // Now that we have a "q" of all functions to run for this user,
+        // execute them asynchronously
+        function next() {
+            if (!q.length) {
+                // done with this q
+                return nextCb();
+            }
+            var cmd = p.shift();
+            cmd[0](cmd[1], next);
+        }
+        next();
+    }
+    lineReader.eachLine(path, function(line, last, cb) {
+        line = line.trim().split("|");
+        function cont(nextCb) {
+            curGroup[line[0]].push(line);
+
+            if (last) {
+                processGroup(curGroup, oncomplete);
+            }
+        }
+        if (cur_uid != line[1].trim()) {
+            processGroup(curGroup, function() {
+                cont(cb);
+            });
+        } else {
+            cont(cb);
+        }
     });
 };
 
