@@ -215,7 +215,7 @@ var map = {
             callsign: doc[3],
             log_date: doc[4],
             code: doc[5],
-            code_text: logCodeMap(doc[5]) || doc[5]
+            code_text: logCodeMap[doc[5]] || doc[5]
         };
     },
     LA: function(doc) { // License Attachments; note that these aren't real useful since we can't get the files
@@ -273,7 +273,8 @@ function ULSParser(dirPath) {
         HS: path.join(dirPath, "HS.dat"),
         LA: path.join(dirPath, "LA.dat"),
         SC: path.join(dirPath, "SC.dat"),
-        SF: path.join(dirPath, "SF.dat")
+        SF: path.join(dirPath, "SF.dat"),
+        all: path.join(dirPath, "sorted.psv")
     };
     this.rootPath = dirPath;
 
